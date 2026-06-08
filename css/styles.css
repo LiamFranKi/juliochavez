@@ -37,6 +37,8 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -45,6 +47,9 @@ body {
   background: var(--white);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -67,6 +72,11 @@ ul { list-style: none; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+main {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .section {
@@ -211,7 +221,7 @@ ul { list-style: none; }
 }
 
 .preloader__logo {
-  width: 280px;
+  width: min(280px, 75vw);
   margin: 0 auto 24px;
   animation: pulse 1.5s ease-in-out infinite;
 }
@@ -248,8 +258,13 @@ ul { list-style: none; }
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 100%;
   z-index: 1000;
   transition: var(--transition);
+}
+
+.nav__overlay {
+  display: none;
 }
 
 .header.scrolled {
@@ -343,6 +358,7 @@ ul { list-style: none; }
   align-items: center;
   overflow: hidden;
   background: var(--black);
+  max-width: 100%;
 }
 
 .hero__bg {
@@ -385,12 +401,11 @@ ul { list-style: none; }
 
 .hero__title-line {
   display: inline;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2.25rem, 8vw, 5.5rem);
   font-weight: 800;
   line-height: 1.15;
   color: var(--white);
   letter-spacing: -0.02em;
-  white-space: nowrap;
 }
 
 .hero__title-accent {
@@ -471,12 +486,16 @@ ul { list-style: none; }
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .hero__image-wrapper {
   position: relative;
   width: 100%;
-  max-width: 480px;
+  max-width: min(480px, 85vw);
+  margin: 0 auto;
 }
 
 .hero__image-ring {
@@ -510,7 +529,7 @@ ul { list-style: none; }
 .hero__image-badge {
   position: absolute;
   bottom: 20px;
-  right: -10px;
+  right: 0;
   background: var(--red);
   color: var(--white);
   padding: 16px 24px;
@@ -619,6 +638,8 @@ ul { list-style: none; }
 
 .about__image-stack {
   position: relative;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .about__img {
@@ -1328,27 +1349,98 @@ ul { list-style: none; }
     padding: 72px 0;
   }
 
+  .container {
+    padding: 0 16px;
+  }
+
   .nav {
     justify-content: flex-end;
+  }
+
+  .nav__overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    pointer-events: none;
+  }
+
+  .nav__overlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .nav__menu {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 360px;
+    right: 0;
+    left: auto;
+    width: min(320px, 88vw);
+    max-width: none;
     height: 100vh;
+    height: 100dvh;
     background: var(--white);
     flex-direction: column;
     justify-content: center;
-    padding: 40px;
-    box-shadow: var(--shadow-lg);
-    transition: right 0.4s ease;
+    align-items: stretch;
+    padding: 80px 32px 40px;
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.35s ease;
     z-index: 1001;
+    transform: translateX(100%);
+    overflow-y: auto;
   }
 
   .nav__menu.open {
+    transform: translateX(0);
+  }
+
+  .hero__container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero__image-ring--2 {
+    display: none;
+  }
+
+  .hero__image-ring {
+    inset: -12px;
+  }
+
+  .hero__content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero__subtitle {
+    max-width: 100%;
+    padding: 0 4px;
+  }
+
+  .hero__actions {
+    width: 100%;
+    padding: 0 4px;
+  }
+
+  .hero__stats {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .about__experience-card {
+    right: 0;
+    top: 16px;
+  }
+
+  .about__img--secondary {
+    width: 45%;
+    bottom: -20px;
     right: 0;
   }
 
@@ -1416,18 +1508,9 @@ ul { list-style: none; }
   .gallery__item--large img {
     min-height: 280px;
   }
-
-  .about__img--secondary {
-    width: 45%;
-    bottom: -20px;
-  }
 }
 
 @media (max-width: 480px) {
-  .hero__title-line {
-    white-space: normal;
-  }
-
   .hero__actions {
     flex-direction: column;
     align-items: stretch;
