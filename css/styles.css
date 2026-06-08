@@ -1402,12 +1402,14 @@ main {
   .hero__container {
     padding-left: 16px;
     padding-right: 16px;
-    padding-top: calc(var(--header-h) + 40px);
+    padding-top: calc(var(--header-h) + 16px);
+    min-height: auto;
+    padding-bottom: 48px;
   }
 
   .hero__visual {
-    margin-top: 12px;
-    padding-top: 8px;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   .hero__title-line {
