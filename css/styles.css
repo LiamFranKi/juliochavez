@@ -1324,10 +1324,6 @@ main {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .channels__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .footer__grid {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1507,6 +1503,43 @@ main {
 
   .gallery__item--large img {
     min-height: 280px;
+  }
+
+  /* About — nombre centrado */
+  .about__name {
+    text-align: center;
+  }
+
+  /* Propuestas — iconos y títulos centrados */
+  .proposal-card {
+    text-align: center;
+  }
+
+  .proposal-card__icon {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Contacto — texto centrado */
+  .contact__info {
+    text-align: center;
+  }
+
+  .contact__item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Redes — cards apiladas a ancho completo */
+  .channels__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .channel-card {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
